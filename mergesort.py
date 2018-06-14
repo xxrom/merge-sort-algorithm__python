@@ -16,39 +16,41 @@ def mergeSort(array):
     print('left array', leftArray)
     print('right array', rightArray)
 
-    sortedArray = mergeArray(leftArray, rightArray)
-    return sortedArray
+    # сортируем array, учитывая leftArray и rightArray
+    mergeArray(array, leftArray, rightArray)
 
-  else:
-    return array
+  return array
 
 # объединяем два массива в один с помощью сравнения посимвольного
-def mergeArray(leftArray, rightArray):
+def mergeArray(array, leftArray, rightArray):
   leftIndex = 0
   rightIndex = 0
-
-  sortedArray = []
+  arrayIndex = 0
 
   while leftIndex < len(leftArray) and rightIndex < len(rightArray):
     if leftArray[leftIndex] <= rightArray[rightIndex]:
       print('l %s ' % leftArray[leftIndex])
-      sortedArray.append(leftArray[leftIndex])
+      array[arrayIndex] = leftArray[leftIndex]
       leftIndex += 1
 
     else:
       print('l %s ' % rightArray[rightIndex])
-      sortedArray.append(rightArray[rightIndex])
+      array[arrayIndex] = rightArray[rightIndex]
       rightIndex += 1
+
+    arrayIndex += 1
 
   # если остались не добавленные элементы в левом массиве
   if leftIndex < len(leftArray):
     # add left Items
-    sortedArray = sortedArray + leftArray[leftIndex: ]
+    for i in range(leftIndex, len(leftArray)):
+      array[arrayIndex] = leftArray[i]
+      arrayIndex += 1
   else:
     # add right Items
-    sortedArray = sortedArray + rightArray[rightIndex: ]
-
-  return sortedArray
+    for i in range(rightIndex, len(rightArray)):
+      array[arrayIndex] = rightArray[i]
+      arrayIndex += 1
 
 # test
 if __name__ == '__main__':
